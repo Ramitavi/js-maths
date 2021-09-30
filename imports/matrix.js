@@ -1,22 +1,6 @@
 const { types, isNumericType } = require("../src/evaluation/types");
 const { Value, StringValue, NumberValue, BoolValue, ArrayValue } = require("../src/evaluation/values");
-const Matrix = require("../src/maths/Matrix");
-const { RunspaceBuiltinFunction } = require("../src/runspace/Function");
-
-const TYPE = "matrix";
-
-class MatrixValue extends Value {
-  constructor(rs, matrix) {
-    super(rs, matrix ?? new Matrix());
-  }
-
-  type() { return TYPE; }
-
-  /** function: abs() */
-  __abs__() { return this.toPrimitive('matrix').determinant(); }
-
-  __copy__() { return new MatrixValue(this.rs, Matrix.fromString(this.value.toString())); }
-
+const Matrix = require("../src/ma
   /** Return array of array of rows */
   __iter__() { return [...this.value.matrix]; }
 
